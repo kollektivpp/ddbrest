@@ -1,0 +1,30 @@
+{
+  "name": "ddbrest",
+  "version": "0.0.0",
+  "description": "rest client for the DDB API",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kollektivpp/ddbrest.git"
+  },
+  "keywords": [
+    "ddb",
+    "rest",
+    "client"
+  ],
+  "author": "Christian Bromann <mail@christian-bromann.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kollektivpp/ddbrest/issues"
+  },
+  "homepage": "https://github.com/kollektivpp/ddbrest",
+  "devDependencies": {
+    "should": "^3.3.1"
+  }
+}
