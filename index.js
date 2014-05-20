@@ -10,7 +10,11 @@
 var Q = require('q'),
     util = require('util'),
     path = require('path'),
-    request = require('request');
+    request = require('request'),
+
+    // models
+    sectorTypes = require('./lib/models/sectorTypes'),
+    hirarchyTypes = require('./lib/models/hierarchyTypes');
 
 var DDBRest = module.exports = function(token, secure) {
 
@@ -80,9 +84,19 @@ DDBRest.prototype.search = function(query) {
             return this;
         },
         sector: function(sector) {
-            var facet = 'sector_fct';
+            var facet = 'sector_fct',
+                facetValue = sectorTypes[sector.toLowerCase()];
+
+            if(typeof sector !== 'string') {
+                throw new Error('sector facet should be type of string');
+            }
+
+            if(!facetValue) {
+                throw new Error('sector ' + sector + ' couldn\'t be found!\nPlease try one of the following: ' + Object.keys(sectorTypes));
+            }
+
             facets.push('facet=' + facet)
-            facets.push(facet + '=' + sector);
+            facets.push(facet + '=' + facetValue.element);
             return this;
         },
         provider: function(provider) {
