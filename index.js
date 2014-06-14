@@ -115,9 +115,15 @@ DDBRest.prototype.search = function(query) {
             var query = 'query=' + q + '&' + facets.join('&'),
                 deferred = Q.defer();
 
-            self.request('search', '', query, { json: true }, function(err, httpResponse, body) {
+            self.request('search', '', query, {
+                json: true
+            }, function(err, httpResponse, body) {
 
-                if (err) {
+                if (!success) {
+                    return;
+                }
+
+                if (err && failure) {
                     return failure(new Error(err));
                 }
 
@@ -142,13 +148,21 @@ DDBRest.prototype.binary = function(identifier, binaryPathFile) {
 
     return {
         then: function(success, failure) {
-            return self.request('binary', path.join(identifier, binaryPathFile), '', { headers: { 'Accept': 'application/octet-stream' } }, function(err, httpResponse, body) {
+            return self.request('binary', path.join(identifier, binaryPathFile), '', {
+                headers: {
+                    'Accept': 'application/octet-stream'
+                }
+            }, function(err, httpResponse, body) {
 
-                if (err) {
+                if (!success) {
+                    return;
+                }
+
+                if (err && failure) {
                     return failure(new Error(err));
                 }
 
-                if(typeof body === 'string' && body.indexOf('not found') > -1) {
+                if (typeof body === 'string' && body.indexOf('not found') > -1) {
                     err = JSON.parse(body);
                     return failure(new Error(err.name + ': ' + err.message));
                 }
@@ -159,17 +173,21 @@ DDBRest.prototype.binary = function(identifier, binaryPathFile) {
         },
         toFile: function(fileName, cb) {
 
-            if(typeof fileName !== 'string' || (cb && typeof cb !== 'function')) {
+            if (typeof fileName !== 'string' || (cb && typeof cb !== 'function')) {
                 throw new Error('number or type of arguments don\'t agree with binary.toFile command');
             }
 
-            var req = self.request('binary', path.join(identifier, binaryPathFile), '', { headers: { 'Accept': 'application/octet-stream' } }, function(err, httpResponse, body) {
+            self.request('binary', path.join(identifier, binaryPathFile), '', {
+                headers: {
+                    'Accept': 'application/octet-stream'
+                }
+            }, function(err, httpResponse, body) {
 
-                if(err) {
+                if (err) {
                     throw new Error(err);
                 }
 
-                if(typeof body === 'string' && body.indexOf('not found') > -1) {
+                if (typeof body === 'string' && body.indexOf('not found') > -1) {
                     err = JSON.parse(body);
                     throw new Error(err.name + ': ' + err.message);
                 }
@@ -182,9 +200,91 @@ DDBRest.prototype.binary = function(identifier, binaryPathFile) {
     };
 };
 
+DDBRest.prototype.institutions = function(type) {
+
+    var self = this,
+        sector = this.findSectorByTerm(type);
+
+    return {
+        then: function(success, failure) {
+
+            var query = '';
+
+            if (sector) {
+                query = 'sector=' + sector.element;
+            }
+
+            self.request('institutions', '', query, {
+                json: true
+            }, function(err, httpResponse, body) {
+
+                if (err && faliure) {
+                    return failure(err);
+                }
+
+                if (typeof body === 'string' && body.indexOf('not found') > -1) {
+                    err = JSON.parse(body);
+                    return failure(err.name + ': ' + err.message);
+                }
+
+                success(body, httpResponse);
+
+            });
+        }
+    };
+
+};
+
 DDBRest.prototype.request = function(method, path, query, opts, cb) {
-    var url = this.protocol + '://' + this.host + '/' + method + '/' + path,
-        params = merge({ url: url, oauth: this.oauth }, opts || {});
+
+    /**
+     * check for obsolete args
+     */
+    if (typeof opts === 'function') {
+        cb = opts;
+        opts = {};
+    } else if (typeof query === 'function') {
+        cb = query;
+        opts = {};
+        query = '';
+    }
+
+    var url = this.protocol + '://' + this.host + '/' + method + '/' + path + '?' + query,
+        params = merge({
+            url: url,
+            oauth: this.oauth
+        }, opts || {});
 
     return request.get(params, cb);
+
+};
+
+DDBRest.prototype.findSectorByTerm = function(term) {
+
+    if (!term) {
+        return null;
+    }
+
+    var deElements = Object.keys(sectorTypes.de),
+        enElements = Object.keys(sectorTypes.en),
+        length = Math.max(deElements.length, enElements.length),
+        enKey, deKey, i;
+
+    for (i = 0; i < length; ++i) {
+
+        enKey = enElements[i];
+        deKey = deElements[i];
+
+        if (sectorTypes.de[deKey] && sectorTypes.de[deKey].term === term) {
+            sectorTypes.de[deKey].element = deKey;
+            return sectorTypes.de[deKey];
+        } else if (sectorTypes.de[enKey] && sectorTypes.en[enKey].term === term) {
+            sectorTypes.en[enKey].element = enKey;
+            return sectorTypes.en[enKey];
+        }
+
+    }
+
+    return null;
+
 };
