@@ -192,7 +192,9 @@ DDBRest.prototype.binary = function(identifier, binaryPathFile) {
                     throw new Error(err.name + ': ' + err.message);
                 }
 
-                cb(err, httpResponse, body);
+                if(cb) {
+                    cb(err, httpResponse, body);
+                }
 
             }).pipe(fs.createWriteStream(fileName));
 
@@ -230,6 +232,26 @@ DDBRest.prototype.institutions = function(type) {
                 success(body, httpResponse);
 
             });
+        },
+        sectors: function(success, failure) {
+
+            self.request('institutions', 'sectors', '', {
+                json: true
+            }, function(err, httpResponse, body) {
+
+                if (err && faliure) {
+                    return failure(err);
+                }
+
+                if (typeof body === 'string' && body.indexOf('not found') > -1) {
+                    err = JSON.parse(body);
+                    return failure(err.name + ': ' + err.message);
+                }
+
+                success(body, httpResponse);
+
+            });
+
         }
     };
 
