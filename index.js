@@ -34,13 +34,97 @@ var DDBRest = module.exports = function(token, secure) {
 
 DDBRest.prototype.search = function(query) {
 
-    if (typeof query !== 'string') {
-        throw new Error('search query needs to be a string');
-    }
-
     var self = this,
         q = query,
         facets = [];
+
+    if (typeof query !== 'string') {
+        return {
+            facets: function(query) {
+
+                if(!query || typeof query !== 'string') {
+                    throw new Error('facets method requires a query from type string');
+                }
+
+                query = query.toUpperCase();
+
+                if(query !== 'EXTENDED' && query !== 'SEARCH' && query !== 'TECHNICAL') {
+                    throw new Error('facets method query should contain one of the following terms: EXTENDED, SEARCH, TECHNICAL');
+                }
+
+                return {
+                    then: function(success, failure) {
+
+                        var q = query ? 'query=' + query : '';
+
+                        self.request('search', 'facets', q, {
+                            json: true
+                        }, function(err, httpResponse, body) {
+
+                            if (!success) {
+                                return;
+                            }
+
+                            if (err && failure) {
+                                return failure(new Error(err));
+                            }
+
+                            success(body, httpResponse);
+
+                        });
+
+                    }
+                };
+            },
+            sortcriteria: function(success, failure) {
+                self.request('search', 'sortcriteria', '', {
+                    json: true
+                }, function(err, httpResponse, body) {
+
+                    if (!success) {
+                        return;
+                    }
+
+                    if (err && failure) {
+                        return failure(new Error(err));
+                    }
+
+                    success(body, httpResponse);
+
+                });
+            },
+            suggest: function(query) {
+
+                if(!query || typeof query !== 'string') {
+                    throw new Error('suggest method requires a query from type string');
+                }
+
+                return {
+                    then: function(success, failure) {
+
+                        var q = query ? 'query=' + query : '';
+
+                        self.request('search', 'suggest', q, {
+                            json: true
+                        }, function(err, httpResponse, body) {
+
+                            if (!success) {
+                                return;
+                            }
+
+                            if (err && failure) {
+                                return failure(new Error(err));
+                            }
+
+                            success(body, httpResponse);
+
+                        });
+
+                    }
+                };
+            }
+        };
+    }
 
     return {
         from: function(date) {
