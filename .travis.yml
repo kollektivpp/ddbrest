@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - '0.11'
+
+env:
+  global:
+    secure: JTI0sDmEYAtZBqcEAAMXglZUSLcnhSppF0+u0mQw3AfZRlqNNNNXAp7rUMCbtagij1A5Rui/QEatHMuuy9vkzrT++qIAhy21fRJmF6u1Xu7Sj8k16/NPxzqs+B6F13Tuue4y9WI5Cyzt+daYUOAh3TNGK/nN+tekus50BN6Qb90=
+
+script: npm run-script travis
