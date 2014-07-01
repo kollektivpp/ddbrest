@@ -32,6 +32,10 @@ describe('binary method', function() {
             should.exist(api.binary(identifier, path).get);
         });
 
+        it('should throw an error if someone tries to pass a callback as argument', function() {
+            api.binary(identifier, path).get.bind(null, function(){}).should.throw;
+        });
+
         it('returns a base64 string', function(done) {
             api.binary(identifier, path).get().then(function(file) {
                 file.should.be.type('string');
