@@ -1,4 +1,5 @@
---require should
---reporter dot
+test/spec/**/*.js
+--require test/setup.js
+--reporter spec
 --ui bdd
---timeout 9999999
+--timeout 5000

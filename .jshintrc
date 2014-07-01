@@ -7,6 +7,11 @@
   "quotmark": "single",
   "trailing": true,
   "globals": {
-    "require": true
+    "require": true,
+    "describe": true,
+    "it": true,
+    "DDBRest": true,
+    "api": true,
+    "before": true
   }
 }
