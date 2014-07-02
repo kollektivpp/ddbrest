@@ -62,6 +62,21 @@ describe('binary method', function() {
             }, done);
         });
 
+        it('saves no file if identifier is wrong', function(done) {
+            api.binary('doesnotexist', path).toFile('noexist.png').then(done, function(err) {
+                err.should.match(/not found/);
+                fs.existsSync('identifierNotExisting.png').should.be.false;
+                done();
+            });
+        });
+
+        it('saves no file if path is wrong', function(done) {
+            api.binary(identifier, 'does/not/exists.png').toFile('noexist.png').then(done, function(err) {
+                err.should.match(/not found/);
+                fs.existsSync('pathNotExisting.png').should.be.false;
+                done();
+            });
+        });
 
     });
 
