@@ -78,6 +78,13 @@ describe('binary method', function() {
             });
         });
 
+        it('calls failure request if identifier/path is wrong', function(done) {
+            api.binary(identifier, 'does/not/exists.png').get().then(done, function(err) {
+                err.should.match(/not found/);
+                done();
+            });
+        });
+
     });
 
 });
