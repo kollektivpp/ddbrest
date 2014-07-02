@@ -32,7 +32,7 @@ describe('institution method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.institutions(type).get.bind(null, function(){}).should.throw;
+            api.institutions(type).get.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of institutions', function(done) {
@@ -52,7 +52,7 @@ describe('institution method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.institutions(type).sectors.bind(null, function(){}).should.throw;
+            api.institutions(type).sectors.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of institutions', function(done) {

@@ -33,7 +33,7 @@ describe('binary method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.binary(identifier, path).get.bind(null, function(){}).should.throw;
+            api.binary(identifier, path).get.bind(null, function(){}).should.throw();
         });
 
         it('returns a base64 string', function(done) {

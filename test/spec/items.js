@@ -33,7 +33,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).aip.bind(null, function(){}).should.throw;
+            api.items(identifier).aip.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of aips', function(done) {
@@ -54,7 +54,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).binaries.bind(null, function(){}).should.throw;
+            api.items(identifier).binaries.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of binaries', function(done) {
@@ -111,7 +111,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).edm.bind(null, function(){}).should.throw;
+            api.items(identifier).edm.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of edms', function(done) {
@@ -131,7 +131,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).indexingProfile.bind(null, function(){}).should.throw;
+            api.items(identifier).indexingProfile.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of facets', function(done) {
@@ -152,7 +152,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).parents.bind(null, function(){}).should.throw;
+            api.items(identifier).parents.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of parents', function(done) {
@@ -173,7 +173,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).source.bind(null, function(){}).should.throw;
+            api.items(identifier).source.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of source', function(done) {
@@ -192,7 +192,7 @@ describe('items method', function() {
         });
 
         it('should throw an error if someone tries to pass a callback as argument', function() {
-            api.items(identifier).view.bind(null, function(){}).should.throw;
+            api.items(identifier).view.bind(null, function(){}).should.throw();
         });
 
         it('should return a JSON list of view', function(done) {
