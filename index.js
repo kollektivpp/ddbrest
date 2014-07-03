@@ -8,4 +8,4 @@
  *
  */
 
-module.exports = process.env.COV ? require('./lib-cov/ddbrest') : require('./lib/ddbrest');
+module.exports = require('./lib/ddbrest');
