@@ -26,12 +26,6 @@ var facetTestHelper = module.exports = function(searchObj, facetMethod, facetID)
                     value = facet.facetValues[facetValue].value.replace('_1_affiliate_fct_involved','');
 
                 searchObj[facetMethod](value).get(0, 0).then(function(result) {
-
-                    if(!result.numberOfResults) {
-                        console.log('received exeception with status code 200, ignore.', result);
-                        return done();
-                    }
-
                     result.numberOfResults.should.be.exactly(facetCount);
                     done();
                 }, done);
