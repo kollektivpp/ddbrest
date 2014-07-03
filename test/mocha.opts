@@ -2,4 +2,4 @@ test/spec/**/*.js
 --require test/setup.js
 --reporter spec
 --ui bdd
---timeout 3000000
+--timeout 30000
