@@ -8,7 +8,7 @@ module.exports = function(searchObj, facetMethod, facetID) {
     return function(done) {
         // console.log('----------------->',facetMethod);
         // console.log(searchObj);
-        searchObj[facetMethod]().get().then(function(result) {
+        searchObj[facetMethod]().get(0, 0).then(function(result) {
             result.facets.forEach(function(facet) {
 
                 if (facet.field !== facetID) {
@@ -28,7 +28,7 @@ module.exports = function(searchObj, facetMethod, facetID) {
                     facetCount = facet.facetValues[facetValue].count,
                     value = facet.facetValues[facetValue].value.replace('_1_affiliate_fct_involved','');
 
-                searchObj[facetMethod](value).get().then(function(result) {
+                searchObj[facetMethod](value).get(0, 0).then(function(result) {
                     result.numberOfResults.should.be.exactly(facetCount);
                     done();
                 }, done);
