@@ -22,11 +22,8 @@ describe('search method', function() {
             searchMethod.should.have.ownProperty('provider');
         });
 
-        it('makes it possible to search something', function(done) {
-            api.search(query).get().then(function(result) {
-                result.numberOfResults.should.be.greaterThan(0);
-                done();
-            }, done);
+        it('makes it possible to search something', function() {
+            return api.search(query).get().should.have.eventually.property('numberOfResults');
         });
 
         describe('should provide facets to define the search result', function() {
