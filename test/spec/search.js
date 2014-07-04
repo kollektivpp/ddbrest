@@ -41,6 +41,11 @@ describe('search method', function() {
 
         describe('should provide facets to define the search result', function() {
 
+            var timeElement = 'time_61305',
+                timeTerm = '1st half 13th century - 1201 to 1250',
+                sectorElement = 'sec_04',
+                sectorTerm = 'research';
+
             /**
              * the following tests query all possible facets first to do
              * another request using a random facet
@@ -55,6 +60,30 @@ describe('search method', function() {
             it('by using the licenseGroup facet', facetTestHelper(api.search(query), 'licenseGroup', 'license_group'));
             it('by using the license facet',      facetTestHelper(api.search(query), 'license', 'license'));
             it('by using the time facet',         facetTestHelper(api.search(query), 'time', 'time_fct'));
+
+            it('should be able to set time facet by using the namespace element', function() {
+                return api.search(query).time(timeElement).get(0,1).should.be.fulfilled.then(function(res) {
+                    docId = res.results[0].docs[0].id;
+                });
+            });
+
+            it('should be able to set time facet by using the namespace term', function() {
+                return api.search(query).time(timeTerm).get(0, 1).should.be.fulfilled.then(function(res) {
+                    res.results[0].docs[0].id.should.be.equal(docId);
+                });
+            });
+
+            it('should be able to set sector facet by using the namespace element', function() {
+                return api.search(query).sector(sectorElement).get(0,1).should.be.fulfilled.then(function(res) {
+                    docId = res.results[0].docs[0].id;
+                });
+            });
+
+            it('should be able to set sector facet by using the namespace term', function() {
+                return api.search(query).sector(sectorTerm).get(0, 1).should.be.fulfilled.then(function(res) {
+                    res.results[0].docs[0].id.should.be.equal(docId);
+                });
+            });
 
         });
 
