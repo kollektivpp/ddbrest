@@ -25,10 +25,7 @@ var facetTestHelper = module.exports = function(searchObj, facetMethod, facetID)
                     facetCount = facet.facetValues[facetValue].count,
                     value = facet.facetValues[facetValue].value.replace('_1_affiliate_fct_involved','');
 
-                searchObj[facetMethod](value).get(0, 0).then(function(result) {
-                    result.numberOfResults.should.be.exactly(facetCount);
-                    done();
-                }, done);
+                searchObj[facetMethod](value).get(0, 0).should.eventually.contain({numberOfResults: facetCount}).notify(done);
 
             });
         }, done);

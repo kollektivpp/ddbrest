@@ -1,7 +1,6 @@
 /*jshint -W030 */
 
-var should = require('should'),
-    type = 'other';
+var type = 'other';
 
 describe('institution method', function() {
 
@@ -35,12 +34,8 @@ describe('institution method', function() {
             api.institutions(type).get.bind(null, function(){}).should.throw();
         });
 
-        it('should return a JSON list of institutions', function(done) {
-            api.institutions(type).get().then(function(res) {
-                res.should.be.an.instanceOf(Array);
-                res.should.have.a.lengthOf(49);
-                done();
-            }, done);
+        it('should return a JSON list of institutions', function() {
+            return expect(api.institutions(type).get()).to.be.eventually.instanceof(Array);
         });
 
     });
@@ -55,12 +50,8 @@ describe('institution method', function() {
             api.institutions(type).sectors.bind(null, function(){}).should.throw();
         });
 
-        it('should return a JSON list of institutions', function(done) {
-            api.institutions(type).sectors().then(function(res) {
-                res.should.be.an.instanceOf(Array);
-                res.should.have.a.lengthOf(7);
-                done();
-            }, done);
+        it('should return a JSON list of institutions', function() {
+            return expect(api.institutions(type).sectors()).to.be.eventually.instanceof(Array);
         });
 
     });

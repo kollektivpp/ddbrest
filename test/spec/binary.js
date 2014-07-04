@@ -1,7 +1,6 @@
 /*jshint -W030 */
 
-var should = require('should'),
-    fs = require('fs'),
+var fs = require('fs'),
     identifier = 'OAXO2AGT7YH35YYHN3YKBXJMEI77W3FF',
     path = 'mvpr/1.jpg';
 
@@ -36,11 +35,8 @@ describe('binary method', function() {
             api.binary(identifier, path).get.bind(null, function(){}).should.throw();
         });
 
-        it('returns a base64 string', function(done) {
-            api.binary(identifier, path).get().then(function(file) {
-                file.should.be.type('string');
-                done();
-            }, done);
+        it('returns a base64 string', function() {
+            return expect(api.binary(identifier, path).get()).to.be.eventually.a('string');
         });
 
     });
@@ -55,34 +51,26 @@ describe('binary method', function() {
             api.binary(identifier, path).toFile.bind(null).should.throw();
         });
 
-        it('saves the file to the filesystem', function(done) {
-            api.binary(identifier, path).toFile('test.png').then(function() {
+        it('saves the file to the filesystem', function() {
+            return api.binary(identifier, path).toFile('test.png').should.be.fulfilled.then(function() {
                 fs.existsSync('test.png').should.be.true;
-                done();
-            }, done);
+            });
         });
 
-        it('saves no file if identifier is wrong', function(done) {
-            api.binary('doesnotexist', path).toFile('noexist.png').then(done, function(err) {
-                err.should.match(/not found/);
+        it('saves no file if identifier is wrong', function() {
+            return api.binary('doesnotexist', path).toFile('noexist.png').should.be.rejectedWith('Item \'doesnotexist\' not found.').then(function() {
                 fs.existsSync('identifierNotExisting.png').should.be.false;
-                done();
             });
         });
 
-        it('saves no file if path is wrong', function(done) {
-            api.binary(identifier, 'does/not/exists.png').toFile('noexist.png').then(done, function(err) {
-                err.should.match(/not found/);
+        it('saves no file if path is wrong', function() {
+            return api.binary(identifier, 'does/not/exists.png').toFile('noexist.png').should.be.rejectedWith(/\/does\/not\/exists\.png not found/).then(function() {
                 fs.existsSync('pathNotExisting.png').should.be.false;
-                done();
             });
         });
 
-        it('calls failure request if identifier/path is wrong', function(done) {
-            api.binary(identifier, 'does/not/exists.png').get().then(done, function(err) {
-                err.should.match(/not found/);
-                done();
-            });
+        it('calls failure request if identifier/path is wrong', function() {
+            return api.binary(identifier, 'does/not/exists.png').get().should.be.rejectedWith(/\/does\/not\/exists\.png not found/);
         });
 
     });

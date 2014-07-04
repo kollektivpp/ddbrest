@@ -12,6 +12,8 @@
     "it": true,
     "DDBRest": true,
     "api": true,
-    "before": true
+    "before": true,
+    "expect": true,
+    "should": true
   }
 }
