@@ -86,7 +86,7 @@ describe('search method', function() {
         describe('are a sortcriteria method that', function() {
 
             it('should throw an error if an argument was passed', function() {
-                api.search().sortcriteria.bind(null, function(){}).should.throw;
+                api.search().sortcriteria.bind(null, function(){}).should.throw();
             });
 
             it('should return sortcriterias', function() {
@@ -98,10 +98,10 @@ describe('search method', function() {
         describe('are a suggest method that', function() {
 
             it('should throw an error if the argument is null or not typeof string', function() {
-                api.search().suggest.bind(null, function(){}).should.throw;
-                api.search().suggest.bind(null, 999).should.throw;
-                api.search().suggest.bind(null, true).should.throw;
-                api.search().suggest.bind(null).should.throw;
+                api.search().suggest.bind(null, function(){}).should.throw();
+                api.search().suggest.bind(null, 999).should.throw();
+                api.search().suggest.bind(null, true).should.throw();
+                api.search().suggest.bind(null).should.throw();
             });
 
             it('should return suggestions', function() {
