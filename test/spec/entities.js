@@ -10,7 +10,26 @@ describe.skip('entities method', function() {
         should.exist(api.entities);
     });
 
-    describe('has a search interface that', function() {
+    describe('should throw an error', function() {
+
+        it('if method gets initialised without required parameters', function() {
+             api.institutions.bind(null).should.throw();
+        });
+
+        it('if parameter is not typeof string', function() {
+             api.institutions.bind(null, 1).should.throw();
+             api.institutions.bind(null, {}).should.throw();
+             api.institutions.bind(null, []).should.throw();
+             api.institutions.bind(null, true).should.throw();
+             api.institutions.bind(null, function(){}).should.throw();
+        });
+
+    });
+
+    /**
+     * we can not test the entities method due to GeneralException
+     */
+    describe.skip('has a search interface that', function() {
 
         it('should provide certain methods to set facets', function() {
             var searchMethod = api.entities('some search string');
