@@ -1,7 +1,8 @@
 /*jshint -W030 */
 
 var facetTestHelper = require('../utils/facetTestHelper'),
-    query = 'Berlin';
+    query = 'Berlin',
+    docId;
 
 describe('search method', function() {
 
@@ -24,6 +25,18 @@ describe('search method', function() {
 
         it('makes it possible to search something', function() {
             return api.search(query).get().should.have.eventually.property('numberOfResults');
+        });
+
+        it('makes it possible to search something and sort results descended', function() {
+            return api.search(query).get(0, 1, 'alpha_desc').should.be.fulfilled.then(function(res) {
+                docId = res.results[0].docs[0].id;
+            });
+        });
+
+        it('makes it possible to search something and sort results ascendent', function() {
+            return api.search(query).get(0, 1, 'alpha_asc').should.be.fulfilled.then(function(res) {
+                res.results[0].docs[0].id.should.be.not.equal(docId);
+            });
         });
 
         describe('should provide facets to define the search result', function() {
