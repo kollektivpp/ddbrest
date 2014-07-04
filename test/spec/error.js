@@ -2,7 +2,7 @@ var ErrorHandler = require('../../lib/utils/error'),
     name = 'CustomException',
     message = 'some error message';
 
-describe.only('ErrorHandler', function() {
+describe('ErrorHandler', function() {
 
     it('should throw error with custom type and message', function() {
         var err = new ErrorHandler(name, message);
