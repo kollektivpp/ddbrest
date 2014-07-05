@@ -4,7 +4,7 @@ var facetTestHelper = require('../utils/facetTestHelper'),
     query = 'Berlin',
     docId;
 
-describe.skip('entities method', function() {
+describe('entities method', function() {
 
     before(function() {
         should.exist(api.entities);
