@@ -14,15 +14,15 @@ describe('entities method', function() {
     describe('should throw an error', function() {
 
         it('if method gets initialised without required parameters', function() {
-             api.institutions.bind(null).should.throw();
+             api.entities.bind(null).should.throw();
         });
 
         it('if parameter is not typeof string', function() {
-             api.institutions.bind(null, 1).should.throw();
-             api.institutions.bind(null, {}).should.throw();
-             api.institutions.bind(null, []).should.throw();
-             api.institutions.bind(null, true).should.throw();
-             api.institutions.bind(null, function(){}).should.throw();
+             api.entities.bind(null, 1).should.throw();
+             api.entities.bind(null, {}).should.throw();
+             api.entities.bind(null, []).should.throw();
+             api.entities.bind(null, true).should.throw();
+             api.entities.bind(null, function(){}).should.throw();
         });
 
     });
