@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "travis": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "travis": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "build": "mkdir dist && ./node_modules/.bin/browserify lib/ddbrest.js > dist/ddbrest.js && ./node_modules/.bin/uglifyjs dist/ddbrest.js -c > dist/ddbrest.min.js"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,14 @@
   },
   "homepage": "https://github.com/kollektivpp/ddbrest",
   "devDependencies": {
+    "browserify": "^4.2.0",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "coveralls": "^2.10.1",
     "mocha": "^1.20.1",
     "mocha-lcov-reporter": "0.0.1",
-    "mocha-sauce": "git://github.com/pbakaus/mocha-sauce.git"
+    "mocha-sauce": "git://github.com/pbakaus/mocha-sauce.git",
+    "uglify-js": "^2.4.14"
   },
   "dependencies": {
     "deepmerge": "^0.2.7",
