@@ -1,4 +1,4 @@
-DDBRest
+DDBRest [![Build Status](https://travis-ci.org/kollektivpp/ddbrest.svg?branch=master)](https://travis-ci.org/kollektivpp/ddbrest) [![Coverage Status](https://coveralls.io/repos/kollektivpp/ddbrest/badge.png?branch=master)](https://coveralls.io/r/kollektivpp/ddbrest?branch=master)
 =======
 
 The [Deutsche Digitale Bibliothek](https://deutsche-digitale-bibliothek.de) is a database
