@@ -1,6 +1,7 @@
 /*jshint -W030 */
 
-var facetTestHelper = require('../utils/facetTestHelper'),
+var Q = require('q'),
+    facetTestHelper = require('../utils/facetTestHelper'),
     query = 'Berlin',
     docId;
 
@@ -44,12 +45,14 @@ describe('search method', function() {
             var timeElement = 'time_61305',
                 timeTerm = '1st half 13th century - 1201 to 1250',
                 sectorElement = 'sec_04',
-                sectorTerm = 'research';
+                sectorTerm = 'research',
+                facetLimit = 10;
 
             /**
              * the following tests query all possible facets first to do
              * another request using a random facet
              */
+            it('by using the affiliate facet',    facetTestHelper(api.search(query), 'affiliate', 'affiliate_fct'));
             it('by using the place facet',        facetTestHelper(api.search(query), 'place', 'place_fct'));
             it('by using the keywords facet',     facetTestHelper(api.search(query), 'keywords', 'keywords_fct'));
             it('by using the type facet',         facetTestHelper(api.search(query), 'type', 'type_fct'));
@@ -82,6 +85,21 @@ describe('search method', function() {
             it('should be able to set sector facet by using the namespace term', function() {
                 return api.search(query).sector(sectorTerm).get(0, 1).should.be.fulfilled.then(function(res) {
                     res.results[0].docs[0].id.should.be.equal(docId);
+                });
+            });
+
+            it('should limit the facet length by using minDocs filter', function() {
+                return Q.all([
+                    api.search(query).affiliate().get(0,2),
+                    api.search(query).affiliate().get(0,2, 'ALPHA_ASC', 1000)
+                ]).then(function(data) {
+                    expect(data[0].facets[0].numberOfFacets).to.be.above(data[1].facets[0].numberOfFacets);
+                });
+            });
+
+            it('should limit the facet length by using the facetLimit filter', function() {
+                return api.search(query).affiliate().get(0, 1, 'ALPHA_ASC', null, facetLimit).should.be.fulfilled.then(function(res) {
+                    res.facets[0].numberOfFacets.should.be.deep.equal(facetLimit);
                 });
             });
 
