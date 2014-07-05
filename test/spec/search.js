@@ -1,11 +1,11 @@
 /*jshint -W030 */
 
-var Q = require('q'),
-    facetTestHelper = require('../utils/facetTestHelper'),
-    query = 'Berlin',
+var query = 'Berlin',
     docId;
 
 describe('search method', function() {
+
+    this.timeout(100000);
 
     before(function() {
         should.exist(api.search);

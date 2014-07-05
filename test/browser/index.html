@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>Mocha Tests</title>
+<link rel="stylesheet" href="/ddbrest/components/mocha/mocha.css" />
+
+<style>
+#fixture {
+    position: absolute;
+    top: -9999;
+    left: -9999;
+};
+</style>
+
+<script src="/ddbrest/components/mocha/mocha.js"></script>
+<script src="/ddbrest/components/chai/chai.js"></script>
+<script src="/ddbrest/components/chai-as-promised/lib/chai-as-promised.js"></script>
+<script src="/ddbrest/components/q/q.js"></script>
+<script src="/ddbrest/dist/ddbrest.js"></script>
+
+
+<script>
+global.mocha.setup('bdd');
+global.api = new DDBRest('gMsAKQW1jUHU9qw1T2YVlTpjDuxNYNa17NPDZ92EfdapnavHnNC1398598587284');
+</script>
+
+<script src="/ddbrest/test/utils/facetTestHelper.js"></script>
+<script src="/ddbrest/test/spec/initialisation.js"></script>
+<script src="/ddbrest/test/spec/institutions.js"></script>
+<script src="/ddbrest/test/spec/items.js"></script>
+<script src="/ddbrest/test/spec/binary.js"></script>
+<script src="/ddbrest/test/spec/entities.js"></script>
+<script src="/ddbrest/test/spec/search.js"></script>
+
+<script>
+global.onload = function() {
+    global.chai.should();
+    global.chai.use(global.chaiAsPromised);
+    global.chaiAsPromised = global.chaiAsPromised;
+    global.AssertionError = global.chai.AssertionError;
+    global.Assertion = global.chai.Assertion;
+    global.assert = global.chai.assert;
+    global.expect = global.chai.expect;
+    global.should = global.chai.should();
+    global.fulfilledPromise = global.Q.resolve;
+    global.rejectedPromise = global.Q.reject;
+    global.defer = global.Q.defer;
+
+    global.mocha.api = api;
+    global.mocha.run();
+};
+</script>
+
+<div id="mocha"></div>

@@ -1,10 +1,7 @@
 /**
  * test helper to test if searchresults gets limited by using facets
  */
-
-var DDBRest = require('../../index');
-
-var facetTestHelper = module.exports = function(searchObj, facetMethod, facetID) {
+var facetTestHelper = function(searchObj, facetMethod, facetID) {
     return function(done) {
         searchObj[facetMethod]().get(0, 0).then(function(result) {
             result.facets.forEach(function(facet) {
@@ -31,3 +28,12 @@ var facetTestHelper = module.exports = function(searchObj, facetMethod, facetID)
         }, done);
     };
 };
+
+/**
+ * expose helper
+ */
+if(typeof exports === 'undefined'){
+    window.facetTestHelper = facetTestHelper;
+} else {
+    module.exports = facetTestHelper;
+}

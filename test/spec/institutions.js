@@ -4,6 +4,8 @@ var type = 'other';
 
 describe('institution method', function() {
 
+    this.timeout(100000);
+
     before(function() {
         should.exist(api.institutions);
     });

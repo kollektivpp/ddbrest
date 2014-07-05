@@ -5,6 +5,8 @@ var identifier = 'OAXO2AGT7YH35YYHN3YKBXJMEI77W3FF',
 
 describe('items method', function() {
 
+    this.timeout(100000);
+
     before(function() {
         should.exist(api.items);
     });

@@ -1,13 +1,15 @@
 language: node_js
 
 node_js:
-  - '0.11'
-
-env:
-  global:
-    secure: JTI0sDmEYAtZBqcEAAMXglZUSLcnhSppF0+u0mQw3AfZRlqNNNNXAp7rUMCbtagij1A5Rui/QEatHMuuy9vkzrT++qIAhy21fRJmF6u1Xu7Sj8k16/NPxzqs+B6F13Tuue4y9WI5Cyzt+daYUOAh3TNGK/nN+tekus50BN6Qb90=
+    - '0.11'
 
 before_script:
     - npm install -g istanbul
 
 script: npm run-script travis
+
+env:
+    global:
+        - secure: JTI0sDmEYAtZBqcEAAMXglZUSLcnhSppF0+u0mQw3AfZRlqNNNNXAp7rUMCbtagij1A5Rui/QEatHMuuy9vkzrT++qIAhy21fRJmF6u1Xu7Sj8k16/NPxzqs+B6F13Tuue4y9WI5Cyzt+daYUOAh3TNGK/nN+tekus50BN6Qb90=
+        - secure: BlcnhkvZl9EDvJpNoMlyBLFlyNh8YfWvY47dPIsAJcVhYMMrKQIKgdKyYSQuEALA3C5KLX6Ys7FpTO+uDU4GKUs6/7DO1kcvxhmdwMZyr0h/xFHq/72dn3Ef48mn8OSgVA4jq6DoxlX3M3yKItgwsTE5NuKu4LDD8+lcJpeRf/I=
+        - secure: eIWndKW12GQHeBNgYdpiazh6EYBMoM+HKnB1UP5lxsjFZcFwvryP+CkOjI4i6WSd5TVkxgcUBH/vrjmrLY9d0aIk9XqNyuzS4A69Q3/KyFNmcwUSYe6XW0oaiKqmUa7YDdwyh9yGPrl9yqYJX3ny2G9LLcKzUSglLCTwwbzRKYk=

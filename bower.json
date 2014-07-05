@@ -1,0 +1,28 @@
+{
+  "name": "ddbrest",
+  "main": "dist/ddbrest.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kollektivpp/ddbrest",
+  "authors": [
+    "christian-bromann <contact@christian-bromann.com>"
+  ],
+  "description": "rest client for the DDB API",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "chai-as-promised": "~4.1.1",
+    "mocha": "~1.20.1",
+    "chai": "~1.9.1",
+    "q": "~1.0.1"
+  }
+}

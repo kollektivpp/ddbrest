@@ -1,10 +1,11 @@
 /*jshint -W030 */
 
-var fs = require('fs'),
-    identifier = 'OAXO2AGT7YH35YYHN3YKBXJMEI77W3FF',
+var identifier = 'OAXO2AGT7YH35YYHN3YKBXJMEI77W3FF',
     path = 'mvpr/1.jpg';
 
 describe('binary method', function() {
+
+    this.timeout(100000);
 
     before(function() {
         should.exist(api.binary);
@@ -39,9 +40,26 @@ describe('binary method', function() {
             return expect(api.binary(identifier, path).get()).to.be.eventually.a('string');
         });
 
+        it('saves no file if identifier is wrong', function() {
+            return api.binary('doesnotexist', path).get().should.be.rejectedWith('Item \'doesnotexist\' not found.');
+        });
+
+        it('calls failure request if path is wrong', function() {
+            return api.binary(identifier, 'does/not/exists.png').get().should.be.rejectedWith(/\/does\/not\/exists\.png not found/);
+        });
+
     });
 
+    /**
+     * toFile() function will not be tested within the browser
+     */
+    if(typeof process === 'undefined') {
+        return;
+    }
+
     describe('should provide a toFile method that', function() {
+
+        var fs = require('fs');
 
         before(function() {
             should.exist(api.binary(identifier, path).toFile);
@@ -67,10 +85,6 @@ describe('binary method', function() {
             return api.binary(identifier, 'does/not/exists.png').toFile('noexist.png').should.be.rejectedWith(/\/does\/not\/exists\.png not found/).then(function() {
                 fs.existsSync('pathNotExisting.png').should.be.false;
             });
-        });
-
-        it('calls failure request if identifier/path is wrong', function() {
-            return api.binary(identifier, 'does/not/exists.png').get().should.be.rejectedWith(/\/does\/not\/exists\.png not found/);
         });
 
     });

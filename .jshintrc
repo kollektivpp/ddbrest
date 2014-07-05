@@ -14,6 +14,7 @@
     "api": true,
     "before": true,
     "expect": true,
-    "should": true
+    "should": true,
+    "facetTestHelper": true
   }
 }

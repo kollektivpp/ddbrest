@@ -1,5 +1,7 @@
 // make lib global available through all tests
 GLOBAL.DDBRest = require('../index.js');
+GLOBAL.Q = require('q');
+GLOBAL.facetTestHelper = require('./utils/facetTestHelper');
 GLOBAL.api = new DDBRest(process.env.DDBREST_KEY);
 
 var chai = require('chai');
