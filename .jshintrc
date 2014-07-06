@@ -15,6 +15,7 @@
     "before": true,
     "expect": true,
     "should": true,
-    "facetTestHelper": true
+    "facetTestHelper": true,
+    "define": true
   }
 }
