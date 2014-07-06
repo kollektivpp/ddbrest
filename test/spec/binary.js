@@ -89,4 +89,12 @@ describe('binary method', function() {
 
     });
 
+    describe('should provide a getPath method that', function() {
+
+        it('returns the path to the file', function() {
+            return api.binary(identifier, path).getPath().should.eventually.be.deep.equal('http://api.deutsche-digitale-bibliothek.de/binary/OAXO2AGT7YH35YYHN3YKBXJMEI77W3FF/mvpr/1.jpg?oauth_consumer_key=' + process.env.DDBREST_KEY);
+        });
+
+    });
+
 });
