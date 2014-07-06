@@ -1,6 +1,6 @@
 {
   "name": "ddbrest",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "rest client for the DDB API",
   "main": "index.js",
   "directories": {
