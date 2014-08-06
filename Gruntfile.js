@@ -18,11 +18,11 @@ module.exports = function(grunt) {
         version: '36',
         platform: 'Windows 8.1'
     }, {
-        browserName: 'firefox',
+        browserName: 'chrome',
         version: '33',
         platform: 'Windows 8.1'
     }, {
-        browserName: 'firefox',
+        browserName: 'chrome',
         version: '30',
         platform: 'Windows 8.1'
     }, {
@@ -37,6 +37,26 @@ module.exports = function(grunt) {
         browserName: 'internet explorer',
         version: '9',
         platform: 'Windows 7'
+    }, {
+        browserName: 'iphone',
+        version: '7.1',
+        platform: 'OS X 10.9',
+        deviceName: 'iPhone'
+    }, {
+        browserName: 'ipad',
+        version: '7.1',
+        platform: 'OS X 10.9',
+        deviceName: 'iPad'
+    }, {
+        browserName: 'iphone',
+        version: '6.1',
+        platform: 'OS X 10.9',
+        deviceName: 'iPhone'
+    }, {
+        browserName: 'ipad',
+        version: '6.1',
+        platform: 'OS X 10.9',
+        deviceName: 'iPad'
     }];
 
     grunt.initConfig({
