@@ -72,7 +72,7 @@ module.exports = function(grunt) {
                     build: process.env.TRAVIS_JOB_ID,
                     testname: 'mocha tests',
                     tunneled: false,
-                    throttled: 9,
+                    throttled: browsers.length,
                     sauceConfig: {
                         'video-upload-on-pass': false
                     },
