@@ -3,6 +3,8 @@
 DDBRest [![Build Status](https://travis-ci.org/kollektivpp/ddbrest.svg?branch=master)](https://travis-ci.org/kollektivpp/ddbrest) [![Coverage Status](https://coveralls.io/repos/kollektivpp/ddbrest/badge.png?branch=master)](https://coveralls.io/r/kollektivpp/ddbrest?branch=master)
 =======
 
+[![Sauce Test Status](https://saucelabs.com/buildstatus/ddbrest)](https://saucelabs.com/u/ddbrest)
+
 The [Deutsche Digitale Bibliothek](https://deutsche-digitale-bibliothek.de) is a database
 that provides free access to a huge amount of cultural and scientific datasets like books,
 archives, images, music or movies. With an API it makes this data available to many developers

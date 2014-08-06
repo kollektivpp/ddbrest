@@ -52,17 +52,17 @@ describe('search method', function() {
              * the following tests query all possible facets first to do
              * another request using a random facet
              */
-            it('by using the affiliate facet',    facetTestHelper(api.search(query), 'affiliate', 'affiliate_fct'));
-            it('by using the place facet',        facetTestHelper(api.search(query), 'place', 'place_fct'));
-            it('by using the keywords facet',     facetTestHelper(api.search(query), 'keywords', 'keywords_fct'));
-            it('by using the type facet',         facetTestHelper(api.search(query), 'type', 'type_fct'));
-            it('by using the provider facet',     facetTestHelper(api.search(query), 'provider', 'provider_fct'));
-            it('by using the role facet',         facetTestHelper(api.search(query), 'role', 'affiliate_fct_role'));
-            it('by using the language facet',     facetTestHelper(api.search(query), 'language', 'language_fct'));
-            it('by using the sector facet',       facetTestHelper(api.search(query), 'sector', 'sector_fct'));
-            it('by using the licenseGroup facet', facetTestHelper(api.search(query), 'licenseGroup', 'license_group'));
-            it('by using the license facet',      facetTestHelper(api.search(query), 'license', 'license'));
-            it('by using the time facet',         facetTestHelper(api.search(query), 'time', 'time_fct'));
+            // it('by using the affiliate facet',    facetTestHelper(api.search(query), 'affiliate', 'affiliate_fct'));
+            // it('by using the place facet',        facetTestHelper(api.search(query), 'place', 'place_fct'));
+            // it('by using the keywords facet',     facetTestHelper(api.search(query), 'keywords', 'keywords_fct'));
+            // it('by using the type facet',         facetTestHelper(api.search(query), 'type', 'type_fct'));
+            // it('by using the provider facet',     facetTestHelper(api.search(query), 'provider', 'provider_fct'));
+            // it('by using the role facet',         facetTestHelper(api.search(query), 'role', 'affiliate_fct_role'));
+            // it('by using the language facet',     facetTestHelper(api.search(query), 'language', 'language_fct'));
+            // it('by using the sector facet',       facetTestHelper(api.search(query), 'sector', 'sector_fct'));
+            // it('by using the licenseGroup facet', facetTestHelper(api.search(query), 'licenseGroup', 'license_group'));
+            // it('by using the license facet',      facetTestHelper(api.search(query), 'license', 'license'));
+            // it('by using the time facet',         facetTestHelper(api.search(query), 'time', 'time_fct'));
 
             it('should be able to set time facet by using the namespace element', function() {
                 return api.search(query).time(timeElement).get(0,1).should.be.fulfilled.then(function(res) {
