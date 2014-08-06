@@ -31,9 +31,11 @@
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "coveralls": "^2.10.1",
+    "grunt": "^0.4.5",
+    "grunt-saucelabs": "^8.2.0",
     "mocha": "^1.20.1",
     "mocha-lcov-reporter": "0.0.1",
-    "mocha-sauce": "git://github.com/pbakaus/mocha-sauce.git",
+    "saucelabs": "^0.1.1",
     "uglify-js": "^2.4.14"
   },
   "dependencies": {
